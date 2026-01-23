@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Rubyla Studios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../logo.png" alt="Rubyla Studios Logo" class="logo">
+                <span class="brand-text">Rubyla Studios</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link" data-page="home">Anasayfa</a>
+                <a href="projects.html" class="nav-link" data-page="projects">Projeler</a>
+                <a href="announcements.html" class="nav-link" data-page="announcements">Duyurular</a>
+                <a href="contact.html" class="nav-link active" data-page="contact">İletişim</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact-page" class="page active">
+        <section class="contact-section">
+            <div class="container">
+                <h1 class="page-title">İletişim</h1>
+
+                <!-- Social Media Section -->
+                <div class="social-media-section">
+                    <h2 class="section-subtitle">Bizi Sosyal Medyada Takip Edin</h2>
+                    <div class="social-links">
+                        <a href="https://discord.gg/8w8aKXFEkQ" target="_blank" class="social-icon" title="Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@rubyla.studios" target="_blank" class="social-icon" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://instagram.com/rubyla.studios" target="_blank" class="social-icon" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://x.com/rubylastudios" target="_blank" class="social-icon" title="X (Twitter)">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form Section -->
+                <div class="contact-form-section">
+                    <h2 class="section-subtitle">Bize Mesaj Gönderin</h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Adınız *</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                placeholder="Adınızı giriniz" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-posta Adresiniz *</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="ornek@email.com" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mesajınız *</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                placeholder="Mesajınızı yazınız..." 
+                                rows="6" 
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </form>
+                    <p class="form-info">Mesajınız rubyla.special@gmail.com adresine gönderilecektir.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Rubyla Studios Tüm Hakları Saklıdır</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/contact.js"></script>
+</body>
+</html>

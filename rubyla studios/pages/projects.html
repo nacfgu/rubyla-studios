@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeler - Rubyla Studios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../logo.png" alt="Rubyla Studios Logo" class="logo">
+                <span class="brand-text">Rubyla Studios</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link" data-page="home">Anasayfa</a>
+                <a href="projects.html" class="nav-link active" data-page="projects">Projeler</a>
+                <a href="announcements.html" class="nav-link" data-page="announcements">Duyurular</a>
+                <a href="contact.html" class="nav-link" data-page="contact">İletişim</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PROJECTS PAGE -->
+    <div id="projects-page" class="page active">
+        <section class="projects-section">
+            <div class="container">
+                <h1 class="page-title">Projelerimiz</h1>
+                <div id="projectsList" class="projects-list">
+                    <!-- Projeler JavaScript tarafından yüklenecek -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="project-detail">
+                <div class="project-gallery" id="projectGallery">
+                    <!-- Galeri JavaScript tarafından yüklenecek -->
+                </div>
+                <div class="project-info">
+                    <h2 id="projectTitle"></h2>
+                    <p id="projectDescription"></p>
+                    <div class="project-details-grid">
+                        <div class="detail-item">
+                            <h4>Tür</h4>
+                            <p id="projectType"></p>
+                        </div>
+                        <div class="detail-item">
+                            <h4>Durumu</h4>
+                            <p id="projectStatus"></p>
+                        </div>
+                    </div>
+                    <a id="downloadBtn" href="#" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> İndirmek İçin Tıkla
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Rubyla Studios Tüm Hakları Saklıdır</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/projects.js"></script>
+</body>
+</html>
