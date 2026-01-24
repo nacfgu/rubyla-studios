@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    animateCounter(entry.target, 8);
+                    animateCounter(entry.target, 10);
                     observer.unobserve(entry.target);
                 }
             });
