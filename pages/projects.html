@@ -15,7 +15,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <img src="../logo.png" alt="Rubyla Studios Logo" class="logo">
+                <img src="../favicon.ico" alt="Rubyla Studios Logo" class="logo">
                 <span class="brand-text">Rubyla Studios</span>
             </div>
             <div class="nav-menu" id="navMenu">
@@ -37,8 +37,24 @@
         <section class="projects-section">
             <div class="container">
                 <h1 class="page-title">Projelerimiz</h1>
-                <div id="projectsList" class="projects-list">
-                    <!-- Projeler JavaScript tarafından yüklenecek -->
+                
+                <!-- CATEGORY VIEW (BAŞLANGIC) -->
+                <div id="categoryView" class="category-view">
+                    <h2 class="section-subtitle">Projektelerimizi Kategorilere Göre Keşfedin</h2>
+                    <div class="categories-grid">
+                        <!-- Kategori Kartları JavaScript tarafından yüklenecek -->
+                    </div>
+                </div>
+
+                <!-- PROJECTS LIST VIEW (KATEGORİ SEÇİLDİKTEN SONRA) -->
+                <div id="projectsListView" class="projects-list-view" style="display: none;">
+                    <button class="btn-back" id="backBtn">
+                        <i class="fas fa-arrow-left"></i> Kategorilere Dön
+                    </button>
+                    <h2 class="category-title" id="categoryTitle"></h2>
+                    <div id="projectsList" class="projects-list">
+                        <!-- Projeler JavaScript tarafından yüklenecek -->
+                    </div>
                 </div>
             </div>
         </section>

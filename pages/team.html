@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duyurular - Rubyla Studios</title>
+    <title>Kadromuz - Rubyla Studios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -21,7 +20,7 @@
             <div class="nav-menu" id="navMenu">
                 <a href="../index.html" class="nav-link" data-page="home">Anasayfa</a>
                 <a href="projects.html" class="nav-link" data-page="projects">Projeler</a>
-                <a href="announcements.html" class="nav-link active" data-page="announcements">Duyurular</a>
+                <a href="announcements.html" class="nav-link" data-page="announcements">Duyurular</a>
                 <a href="contact.html" class="nav-link" data-page="contact">İletişim</a>
             </div>
             <div class="hamburger" id="hamburger">
@@ -32,25 +31,28 @@
         </div>
     </nav>
 
-    <!-- ANNOUNCEMENTS PAGE -->
-    <div id="announcements-page" class="page active">
-        <section class="announcements-section">
+    <main class="page team-page">
+        <section class="team-section">
             <div class="container">
-                <h1 class="page-title">Duyurular</h1>
-                <div id="announcementsList" class="announcements-list">
-                    <!-- Duyurular JavaScript tarafından yüklenecek -->
+                <header class="team-header" style="text-align:center; margin-bottom:24px;">
+                    <h1 class="page-title">Vizyonumuza Hayat Veren Ekibimiz</h1>
+                    <p class="team-lead">Aşağıda ana kadromuz listelenmiştir. Diğer ekip üyelerinin isimleri gizlilik anlaşmaları nedeniyle paylaşılmamaktadır.</p>
+                </header>
+
+                <div id="teamGrid" class="team-grid">
+                    <!-- Team cards injected by js/team.js -->
                 </div>
+
+                <p class="team-note">Bu kişiler bizim ana kadromuzdur.</p>
             </div>
         </section>
-    </div>
+    </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 Rubyla Studios Tüm Hakları Saklıdır</p>
     </footer>
 
     <script src="../js/main.js"></script>
-    <script src="../js/announcements.js"></script>
-    <script src="../js/notifications.js"></script>
+    <script src="../js/team.js"></script>
 </body>
 </html>

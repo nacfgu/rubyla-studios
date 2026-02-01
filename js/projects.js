@@ -1,49 +1,183 @@
 /* =====================================================
    RUBYLA STUDIOS - PROJECTS PAGE JAVASCRIPT
+   4 KATEGORİ SİSTEMİ
    ===================================================== */
 
-// ============ PROJECTS DATA ============
-// Projeler dizisi (boş başlar, dinamik olarak doldurulabilir)
-const projects = [
-    // Örnek: Projeler buraya eklenecek
-    // {
-    //     id: 1,
-    //     title: "Proje Adı",
-    //     description: "Proje açıklaması...",
-    //     type: "Minecraft Build",
-    //     status: "Tamamlandı",
-    //     image: "image-url",
-    //     gallery: ["img1", "img2"],
-    //     downloadUrl: "#"
-    // }
+// ============ CATEGORIES DATA ============
+// 4 Ana Kategori
+const categories = [
+    {
+        id: 'games',
+        title: 'Oyunlar',
+        titleEN: 'Games',
+        icon: 'fa-gamepad',
+        description: 'Eğlenceli oyunlar ve interaktif deneyimler',
+        color: '#FF6B6B',
+        projects: []
+    },
+    {
+        id: 'apps',
+        title: 'Uygulamalar',
+        titleEN: 'Apps',
+        icon: 'fa-mobile-alt',
+        description: 'Faydalı araçlar ve uygulamalar',
+        color: '#4ECDC4',
+        projects: [
+            {
+                id: 'rubitga',
+                title: 'RUbitga Launcher',
+                status: 'Kapalı Alpha',
+                statusEN: 'Closed Alpha',
+                image: '../png/rubitga logo.png',
+                shortDescription: 'Tüm Rubyla oyunlarını ve araçlarını tek merkezden yönetin',
+                fullDescription: 'Tüm Rubyla oyunlarını ve araçlarını tek bir merkezden yöneten, düşük sistem dostu, entegre kütüphane desteği sunan bir ekosistem kapısı.',
+                type: 'Launcher',
+                downloadUrl: '#',
+                isDeveloping: true
+            },
+            {
+                id: 'ruto',
+                title: 'RUto',
+                status: 'Kapalı Alpha',
+                statusEN: 'Closed Alpha',
+                image: '../png/RUto logo.png',
+                shortDescription: 'Minimalist felsefeyle tasarlanmış modern not alma asistanı',
+                fullDescription: 'Minimalist felsefeyle tasarlanmış, açık kaynak kodlu, yüksek kişiselleştirme imkanı sunan ve verimliliği odak noktasına alan yeni nesil bir not alma asistanı.',
+                type: 'Productivity App',
+                downloadUrl: '#',
+                isDeveloping: true
+            }
+        ]
+    },
+    {
+        id: 'animations',
+        title: 'Animasyonlar',
+        titleEN: 'Animations',
+        icon: 'fa-film',
+        description: 'Yaratıcı animasyon ve görsel içerikleri',
+        color: '#FFD700',
+        projects: []
+    },
+    {
+        id: 'extra',
+        title: 'Ekstra',
+        titleEN: 'Extra',
+        icon: 'fa-star',
+        description: 'Özel projeler ve geliştirimler',
+        color: '#9B59B6',
+        projects: [
+            {
+                id: 'ru-admin',
+                title: 'RU Adminlik Sistemi',
+                status: 'Kapalı Alpha',
+                statusEN: 'Closed Alpha',
+                image: '../png/ruas.png',
+                shortDescription: 'İşletmeler ve topluluk yönetimi çözümleri',
+                fullDescription: 'İşletmeler ve topluluk yönetimi için optimize edilmiş, maliyet etkin ve hızlı yönetim çözümleri sunan dijital bir asistan sistemidir. Şu an Kapalı Alpha (Closed Alpha) aşamasında olup, performans testleri titizlikle sürdürülmektedir.',
+                type: 'Admin System',
+                downloadUrl: '#',
+                isDeveloping: true
+            },
+            {
+                id: 'ru-kayit',
+                title: 'RU Kayıt Sistemi (Talent Hub)',
+                status: 'Kapalı Alpha',
+                statusEN: 'Closed Alpha',
+                image: '../png/ruks.png',
+                shortDescription: 'Yetenekli kişileri seçme ve değerlendirme platformu',
+                fullDescription: 'Geleneksel başvuru formlarını bir kenara bırakıyoruz. Build ekibimize katılmak isteyen yetenekleri, kendi geliştirdiğimiz özel bir Minecraft sunucusunda ağırlıyoruz. Adayların; mimari estetik (build), teknik yazılım, kriz yönetimi (adminlik) ve test yeteneklerini interaktif bir ortamda, oyunlaştırılmış (gamified) bir değerlendirme süreciyle ölçümlüyoruz. Geleceğin üreticilerini samimi ama profesyonel bir ortamda seçiyoruz.',
+                type: 'Talent Platform',
+                downloadUrl: '#',
+                isDeveloping: true
+            }
+        ]
+    }
 ];
 
 // ============ DOM ELEMENTS ============
+const categoryView = document.getElementById('categoryView');
+const projectsListView = document.getElementById('projectsListView');
 const projectsList = document.getElementById('projectsList');
 const projectModal = document.getElementById('projectModal');
 const modalClose = document.querySelector('.modal-close');
+const backBtn = document.getElementById('backBtn');
+
+let currentCategory = null;
+
+// ============ RENDER CATEGORIES ============
+// Ana kategori kartlarını render et
+function renderCategories() {
+    const categoriesGrid = document.querySelector('.categories-grid');
+    
+    categoriesGrid.innerHTML = categories.map(category => `
+        <div class="category-card" onclick="selectCategory('${category.id}')">
+            <div class="category-icon">
+                <i class="fas ${category.icon}"></i>
+            </div>
+            <div class="category-content">
+                <h3>${category.title}</h3>
+                <p>${category.description}</p>
+                <small class="category-count">${category.projects.length} Proje</small>
+            </div>
+            <div class="category-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ============ SELECT CATEGORY ============
+// Bir kategoriye tıklandığında
+function selectCategory(categoryId) {
+    currentCategory = categories.find(c => c.id === categoryId);
+    
+    if (!currentCategory) return;
+
+    // Kategori başlığını güncelle
+    document.getElementById('categoryTitle').textContent = currentCategory.title;
+    
+    // Projeleri render et
+    renderProjects();
+    
+    // Görünümü değiştir
+    categoryView.style.display = 'none';
+    projectsListView.style.display = 'block';
+    
+    // Smooth scroll
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 // ============ RENDER PROJECTS ============
-// Projeleri ekrana render et
+// Seçilen kategorideki projeleri render et
 function renderProjects() {
+    if (!currentCategory) return;
+
+    const projects = currentCategory.projects;
+    
     if (projects.length === 0) {
         projectsList.innerHTML = `
             <div class="empty-projects">
-                <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i>
-                Üzgünüz, burada henüz bir şey yok.
+                <div class="empty-illustration">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <h3>Üzgünüz, burada henüz görülebilecek bir şey yok.</h3>
+                <p>Çok yakında!</p>
             </div>
         `;
         return;
     }
 
     projectsList.innerHTML = projects.map(project => `
-        <div class="project-card" onclick="openProjectDetail(${project.id})">
+        <div class="project-card" onclick="openProjectDetail('${project.id}')">
             <div class="project-image">
                 ${project.image ? `<img src="${project.image}" alt="${project.title}">` : '<i class="fas fa-image"></i>'}
+                ${project.status === 'Geliştirme Aşamasında' || project.status === 'In Development' ? 
+                    `<div class="dev-badge">${project.status}</div>` : 
+                    `<div class="status-badge">${project.status}</div>`}
             </div>
             <div class="project-info">
                 <h3>${project.title}</h3>
-                <p>${project.description.substring(0, 100)}${project.description.length > 100 ? '...' : ''}</p>
+                <p>${project.shortDescription}</p>
                 <small style="color: #FFD700;">Tıkla Detaylar İçin →</small>
             </div>
         </div>
@@ -53,57 +187,39 @@ function renderProjects() {
 // ============ PROJECT DETAIL ============
 // Proje detay modalını aç
 function openProjectDetail(projectId) {
-    const project = projects.find(p => p.id === projectId);
+    if (!currentCategory) return;
+    
+    const project = currentCategory.projects.find(p => p.id === projectId);
     
     if (!project) return;
 
     // Başlık ve açıklama
     document.getElementById('projectTitle').textContent = project.title;
-    document.getElementById('projectDescription').textContent = project.description;
+    document.getElementById('projectDescription').textContent = project.fullDescription;
     document.getElementById('projectType').textContent = project.type;
     document.getElementById('projectStatus').textContent = project.status;
 
     // Galeri
     const gallery = document.getElementById('projectGallery');
-    const images = project.gallery || [project.image];
-    
     gallery.innerHTML = `
         <div class="gallery-main" id="galleryMain">
-            ${images[0] ? `<img src="${images[0]}" alt="${project.title}">` : '<i class="fas fa-image" style="font-size: 3rem;"></i>'}
-        </div>
-        <div class="gallery-thumbnails">
-            ${images.map((img, index) => `
-                <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage('${img}', this)">
-                    ${img ? `<img src="${img}" alt="Thumbnail ${index + 1}">` : '<i class="fas fa-image"></i>'}
-                </div>
-            `).join('')}
+            ${project.image ? `<img src="${project.image}" alt="${project.title}">` : '<i class="fas fa-image" style="font-size: 3rem;"></i>'}
         </div>
     `;
 
     // İndirme butonu
     const downloadBtn = document.getElementById('downloadBtn');
-    downloadBtn.href = project.downloadUrl;
-    downloadBtn.download = true;
+    if (project.isDeveloping) {
+        // Geliştirme aşamasındaki projelerin indirme butonunu gizle
+        downloadBtn.style.display = 'none';
+    } else {
+        downloadBtn.style.display = 'inline-flex';
+        downloadBtn.href = project.downloadUrl;
+    }
 
     // Modalı aç
     projectModal.classList.add('active');
     document.body.style.overflow = 'hidden';
-}
-
-// ============ CHANGE GALLERY IMAGE ============
-// Galeri resmini değiştir
-function changeGalleryImage(imageUrl, thumbnailElement) {
-    const galleryMain = document.getElementById('galleryMain');
-    
-    if (imageUrl) {
-        galleryMain.innerHTML = `<img src="${imageUrl}" alt="Gallery Image">`;
-    } else {
-        galleryMain.innerHTML = '<i class="fas fa-image" style="font-size: 3rem;"></i>';
-    }
-
-    // Aktif thumbnail'i güncelle
-    document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
-    thumbnailElement.classList.add('active');
 }
 
 // ============ CLOSE MODAL ============
@@ -130,80 +246,32 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// ============ KEYBOARD NAVIGATION ============
-// Galeri için ok tuşları ile navigasyon
-document.addEventListener('keydown', (e) => {
-    if (!projectModal.classList.contains('active')) return;
-
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        const activeIndex = Array.from(thumbnails).findIndex(t => t.classList.contains('active'));
-        
-        let nextIndex;
-        if (e.key === 'ArrowRight') {
-            nextIndex = (activeIndex + 1) % thumbnails.length;
-        } else {
-            nextIndex = (activeIndex - 1 + thumbnails.length) % thumbnails.length;
-        }
-
-        thumbnails[nextIndex].click();
-    }
+// ============ BACK BUTTON ============
+// Kategorilere geri dön
+backBtn.addEventListener('click', () => {
+    currentCategory = null;
+    categoryView.style.display = 'block';
+    projectsListView.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
-
-// ============ LAZY LOADING ============
-// Projeleri lazy load et
-function setupLazyLoading() {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    observer.unobserve(img);
-                }
-            }
-        });
-    });
-
-    document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
-}
 
 // ============ INITIALIZE ============
 // Sayfayı başlat
 document.addEventListener('DOMContentLoaded', () => {
-    renderProjects();
-    setupLazyLoading();
+    renderCategories();
 
-    // Smooth scroll animasyonu
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = `all 0.5s ease ${index * 0.1}s`;
-        
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, 50);
-    });
+    // Kategori kartlarına smooth animation
+    setTimeout(() => {
+        const categoryCards = document.querySelectorAll('.category-card');
+        categoryCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.9)';
+            card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            }, 50);
+        });
+    }, 100);
 });
-
-// ============ DYNAMIC PROJECT ADDITION ============
-// (Gelecek kullanımlar için) Dinamik proje ekleme fonksiyonu
-function addProject(projectData) {
-    projects.push(projectData);
-    renderProjects();
-}
-
-// Örnek:
-// addProject({
-//     id: projects.length + 1,
-//     title: "Yeni Proje",
-//     description: "Açıklama",
-//     type: "Tür",
-//     status: "Durumu",
-//     image: "resim-url",
-//     gallery: ["img1", "img2"],
-//     downloadUrl: "#"
-// });
